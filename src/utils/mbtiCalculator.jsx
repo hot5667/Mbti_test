@@ -30,3 +30,5 @@ const calculateMBTI = (answers) => {
 
   return result;
 };
+
+export default calculateMBTI;

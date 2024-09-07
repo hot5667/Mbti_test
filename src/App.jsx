@@ -1,7 +1,9 @@
+import AppRouter from './shared/Router';
+
 function App() {
   return (
     <>
-      <div>test</div>
+    <AppRouter/>
     </>
   )
 }
