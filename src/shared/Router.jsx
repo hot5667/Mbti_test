@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import LoginPage from '../pages/Login';
-import Signup from '../pages/Signup';
+import SignupPage from '../pages/Signup';
 import ProfilePage from '../pages/ProfilePage';
 import TestPage from '../pages/TestPage';
 import TestResultPage from '../pages/TestResultPage';
@@ -18,13 +18,15 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/profile"
             element={
-              <ProtectedRoute user={user}>
-                <ProfilePage user={user} setUser={setUser} />
-              </ProtectedRoute>
+              user ? (
+                <ProtectedRoute user={user}>
+                  <ProfilePage user={user} setUser={setUser} />
+                </ProtectedRoute>) :
+                (<Navigate to="/login" />)
             }
           />
           <Route

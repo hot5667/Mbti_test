@@ -30,7 +30,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         onChange={handleChange}
         placeholder="아이디"
         required
-        className="w-full p-4 border-gray-300 rounded-lg"
+        className="w-full p-4 border border-gray-300 rounded-lg"
       />
       <input
         type="password"
