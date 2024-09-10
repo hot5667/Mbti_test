@@ -1,12 +1,13 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 import axios from 'axios';
+import useAuthStore from '../authStore';
 
 // API URL 설정
 const API_URL = import.meta.env.VITE_API_URL;
 
 const registerSchema = z.object({
-  username : z.string().min(1, '사용자 이름을 입력하세요'),
+  username : z.string().min(1, '사용자 이름을 입력하세요').optional(),
   password : z.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다.'),
 })
 
@@ -37,9 +38,9 @@ export const login = async (userData) => {
 };
 
 // 사용자 프로필 가져오기
-export const getUserProfile = async (token) => {
+export const getUserProfile = async (accessToken) => {
   const response = await axios.get(`${API_URL}/profile`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
 };
@@ -57,12 +58,19 @@ export const useRegister = () => {
 
 // 사용자 로그인 Mutation Hook
 export const useLogin = () => {
+  const setUser = useAuthStore(state => state.setUser);
+
   return useMutation({
     mutationFn: login,
     onSuccess: (data) => {
       // JWT 토큰을 localStorage에 저장
-      localStorage.setItem('token', data.token);
-      console.log('로그인 성공, 토큰 저장됨:', data.token);
+      if(data.accessToken){
+        localStorage.setItem('accessToken', data.accessToken);
+        setUser({...data, token: data.accessToken });
+        console.log('로그인 성공, 토큰 저장됨:', data.accessToken);
+      } else {
+        console.error('토큰이 없습니다. 응답 데이터를 확인하세요:', data);
+      }
     },
     onError: (error) => {
       console.error('로그인 실패:', error.response ? error.response.data : error.message);

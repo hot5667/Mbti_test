@@ -4,15 +4,14 @@ import useAuthStore from "../authStore";
 
 const Home = () => {
   const navigate  = useNavigate();
-  const { user } = useAuthStore(state => ({user : state.user}))
+  const { user } = useAuthStore(state => ({user : state.user}));
 
   const handleTestClick = () => {
-    if(!user) {
+    if(user) {
+      navigate("/test");
+    } else {
       alert("로그인이 필요합니다.")
       navigate("/login")
-      return;
-    } else {
-      navigate("/test");
     }
   }
 
