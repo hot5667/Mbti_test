@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TestResultList from "../components/TestResultList";
+import TestResultItem from "../components/TestResultItem";
 import { getTestResults, updateTestResult, deleteTestResult } from '../api/testResults';
 import useAuthStore from "../authStore";
 
@@ -48,7 +48,7 @@ const TestResultPage = () => {
     return (
         <div className="p-4 max-w-4xl mx-auto">
             <h1 className="text-2xl font-bold mb-4">나의 테스트 결과</h1>
-            <TestResultList
+            <TestResultItem
                 results={results}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}

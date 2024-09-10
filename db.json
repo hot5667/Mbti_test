@@ -1,18 +1,61 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "user1",
-        "password": "password1",
-        "token": "abc123"
-      },
-      {
-        "id": 2,
-        "username": "user2",
-        "password": "password2",
-        "token": "xyz789"
-      }
-    ],
-    "testResults": []
-  }
-  
+  "testResults": [
+    {
+      "id": "1",
+      "userId": 1,
+      "nickname": "Test User",
+      "result": "INTJ",
+      "answers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "date": "2024-09-11T00:00:00.000Z",
+      "visibility": true
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "nickname": "Sample User",
+      "result": "ENTP",
+      "answers": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "date": "2024-09-12T00:00:00.000Z",
+      "visibility": false
+    },
+    {
+      "id": "3a11",
+      "nickname": "김도현",
+      "result": "ESTJ",
+      "answers": [
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "아니오",
+        "아니오",
+        "아니오",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예",
+        "예"
+      ],
+      "date": "2024-09-10T19:46:54.648Z",
+      "visibility": true
+    }
+  ]
+}

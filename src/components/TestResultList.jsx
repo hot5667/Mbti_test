@@ -1,25 +1,43 @@
-import React from "react";
-import TestResultItem from "./TestResultItem";
-import useAuthStore from "../authStore";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import TestResultItem from './TestResultItem';
 
-const TestResultList = ({ results }) => {
-    const { user } = useAuthStore(state => ({ user: state.user }));
+const VITE_LOCALHOST_API_URL = import.meta.env.VITE_LOCALHOST_API_URL;
 
-    const filteredResults = results.filter(result => {
-        return result.visibility || (result.visibility === false && user && user.id === result.ownerId);
-    });
+const TestResultList = () => {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    return (
-        <div>
-            {filteredResults.length > 0 ? (
-                filteredResults.map((result) => (
-                    <TestResultItem key={result.id} result={result} />
-                ))
-            ) : (
-                <p>결과가 업습니다.</p>
-            )}
-        </div>
-    )
-}
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        const response = await axios.get(VITE_LOCALHOST_API_URL);
+        setResults(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResults();
+  }, []);
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>오류 발생: {error}</p>;
+
+  return (
+    <div>
+      {results.length > 0 ? (
+        results.map((result) => (
+          <TestResultItem key={result.id} result={result} />
+        ))
+      ) : (
+        <p>결과가 없습니다.</p>
+      )}
+    </div>
+  );
+};
 
 export default TestResultList;
