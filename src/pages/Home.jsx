@@ -27,12 +27,6 @@ const Home = () => {
       >
         검사하기
       </button>
-      <div className="mt-4">
-        <p>회원가입이 안되어있나요?</p>
-        <Link to="/signup" className="text-blue-500 hover:underline">
-          회원가입 하러 가기
-        </Link>
-      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const ProtectedRoute = ({ user, children, loading = false, redirectPath  = '/log
   }
   
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to={redirectPath}/>;
   }
 
   return <>children</>;
