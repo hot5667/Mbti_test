@@ -1,20 +1,24 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "../authStore";
 
 const Home = () => {
   const navigate  = useNavigate();
   const { user } = useAuthStore(state => ({user : state.user}));
 
+  console.log('현재 사용자:', user);
+
   const handleTestClick = () => {
-    if(user) {
+
+    const token = localStorage.getItem("accessToken");
+
+    if(token) {
       navigate("/test");
     } else {
       alert("로그인이 필요합니다.")
-      navigate("/login")
+      navigate("/test")
     }
   }
-
 
   return (
     <div className="text-center p-4">

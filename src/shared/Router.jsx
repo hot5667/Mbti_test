@@ -20,13 +20,11 @@ const AppRouter = () => {
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route
-            path="/profile"
+            path="/Profile"
             element={
-              user ? (
-                <ProtectedRoute user={user}>
-                  <ProfilePage user={user} setUser={setUser} />
-                </ProtectedRoute>) :
-                (<Navigate to="/login" />)
+              <ProtectedRoute user={user}>
+                <ProfilePage user={user} />
+              </ProtectedRoute>
             }
           />
           <Route
