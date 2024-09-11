@@ -25,6 +25,7 @@ const useAuthStore = create(
       logout: () => {
         // 상태와 로컬 스토리지에서 토큰 및 사용자 정보 제거
         localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
         set({ user: null, accessToken: null });
       },
       setUser: (user) => set({ user }), // 유저 정보를 직접 설정할 수 있는 방법 추가

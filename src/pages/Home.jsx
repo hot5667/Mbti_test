@@ -20,11 +20,9 @@ const Home = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-teal-300">
-      <div className="text-center p-8 bg-white rounded-lg shadow-2xl max-w-md mx-auto">
-        <h1 className="text-4xl font-extrabold mb-4 text-gray-800">
-          무료 성격 테스트
-        </h1>
+    <div className="flex items-center justify-center bg-gradient-to-r">
+      <div className="text-center p-8 bg-white rounded-lg shadow-2xl max-w-md w-full mx-4">
+        <h1 className="text-4xl font-extrabold mb-4">무료 성격 테스트</h1>
         <p className="text-lg mb-6 text-gray-700">
           자신의 성격 유형을 확인할 수 있도록 솔직하게 답변해 주세요.
         </p>

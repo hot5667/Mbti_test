@@ -1,43 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import TestResultItem from './TestResultItem';
+import React from 'react';
+import TestResultItem from './TestResultItem'; // ResultItem 컴포넌트 import
 
-const VITE_LOCALHOST_API_URL = import.meta.env.VITE_LOCALHOST_API_URL;
+const TestResultList = ({ results, onUpdateVisibility, onDelete, user }) => {
+    // 비공개 결과는 본인만 볼 수 있도록 필터링
+    const filteredResults = results.filter(result => 
+        result.visibility || result.userId === user.id
+    );
 
-const TestResultList = () => {
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        const response = await axios.get(VITE_LOCALHOST_API_URL);
-        setResults(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchResults();
-  }, []);
-
-  if (loading) return <p>로딩 중...</p>;
-  if (error) return <p>오류 발생: {error}</p>;
-
-  return (
-    <div>
-      {results.length > 0 ? (
-        results.map((result) => (
-          <TestResultItem key={result.id} result={result} />
-        ))
-      ) : (
-        <p>결과가 없습니다.</p>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            {filteredResults.length === 0 ? (
+                <p className="text-gray-400">결과가 없습니다.</p>
+            ) : (
+                filteredResults.map(result => (
+                    <TestResultItem
+                        key={result.id}
+                        result={result}
+                        onUpdateVisibility={onUpdateVisibility}
+                        onDelete={onDelete}
+                        user={user}
+                    />
+                ))
+            )}
+        </div>
+    );
 };
 
 export default TestResultList;
